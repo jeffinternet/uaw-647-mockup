@@ -1,0 +1,36 @@
+- key: constitution-bylaws
+  name: "Constitution and Bylaws"
+  url: "https://uaw.org/standing-committees/constitution-and-bylaws/"
+- key: union-label
+  name: "Union Label"
+  url: "https://uaw.org/standing-committees/union-label/"
+- key: education
+  name: "Education"
+  url: "https://uaw.org/standing-committees/education/"
+- key: conservation-recreation
+  name: "Conservation and Recreation"
+  url: "https://uaw.org/standing-committees/conservation-and-recreation/"
+- key: community-services
+  name: "Community Services"
+  url: "https://uaw.org/standing-committees/community-services/"
+- key: civil-human-rights
+  name: "Civil and Human Rights"
+  url: "https://uaw.org/standing-committees/civil-and-human-rights/"
+- key: citizenship-legislative
+  name: "Citizenship and Legislative (CAP)"
+  url: "https://uaw.org/standing-committees/citizenship-and-legislative-cap/"
+- key: consumer-affairs
+  name: "Consumer Affairs"
+  url: "https://uaw.org/standing-committees/consumer-affairs/"
+- key: organizing
+  name: "Organizing"
+  url: "https://uaw.org/standing-committees/organzing/"
+- key: luca
+  name: "Local Union Communication (UAW-LUCA)"
+  url: "https://uaw.org/luca/"
+- key: veterans
+  name: "Veterans"
+  url: "https://uaw.org/standing-committees/veterans/"
+- key: womens
+  name: "Women's"
+  url: "https://uaw.org/standing-committees/uaw-womens-committee/"
