@@ -319,3 +319,25 @@ footer a:hover{ color:var(--gold); }
 
 .skip-link{ position:absolute; left:-999px; top:0; background:var(--red); color:white; padding:10px 16px; z-index:999; }
 .skip-link:focus{ left:10px; top:10px; }
+
+/* ---------- Seniority report ---------- */
+.seniority-toolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  flex-wrap:wrap; margin-bottom:18px;
+}
+.seniority-toolbar input{
+  flex:1; min-width:240px; max-width:420px;
+  padding:11px 14px; border:1px solid var(--line); border-radius:4px;
+  font-family:inherit; font-size:14.5px; background:var(--card); color:var(--ink);
+}
+.seniority-count{ font-size:13.5px; color:var(--steel); white-space:nowrap; }
+.seniority-table-wrap{
+  max-height:70vh; overflow:auto; border:1px solid var(--line); border-radius:4px;
+}
+.seniority-table{ margin-bottom:0; }
+.seniority-table thead th{
+  position:sticky; top:0; background:var(--card); z-index:1;
+  cursor:pointer; user-select:none; white-space:nowrap;
+}
+.seniority-table thead th:hover{ color:var(--red); }
+.seniority-table .sort-arrow{ font-size:11px; color:var(--red); }
