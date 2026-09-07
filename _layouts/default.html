@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} | {{ site.title }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="main">
+  <nav class="wrap">
+    <a href="index.html" class="logo">
+      <img src="assets/img/uaw-logo.png" alt="UAW logo" class="logo-mark">
+      <span class="word">LOCAL 647<span>Greater Cincinnati, OH</span></span>
+    </a>
+    <button class="navtoggle" aria-label="Toggle menu" onclick="document.querySelector('.navlinks').classList.toggle('open')">&#9776;</button>
+    <ul class="navlinks">
+      {% for item in site.data.nav %}
+        {% if item.dropdown %}
+          {% assign dd_active = false %}
+          {% for d in site.data.nav_documents %}
+            {% if d.url == page.url %}{% assign dd_active = true %}{% endif %}
+          {% endfor %}
+          <li class="has-dropdown{% if dd_active %} active{% endif %}">
+            <button type="button" class="dropdown-toggle" onclick="toggleDropdown(this)">{{ item.label }} <span class="caret">&#9662;</span></button>
+            <ul class="dropdown">
+              {% for d in site.data.nav_documents %}
+                <li><a href="{{ d.url | remove_first: '/' }}">{{ d.label }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% else %}
+          {% assign href = item.url | remove_first: '/' %}
+          {% if item.url == '/' %}{% assign href = 'index.html' %}{% endif %}
+          <li{% if item.url == page.url %} class="active"{% endif %}><a href="{{ href }}">{{ item.label }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+{{ content }}
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>UAW Local 647</h4>
+        <address>
+          10708 Reading Rd<br>
+          Cincinnati, OH 45241<br><br>
+          (513) 555-0147<br>
+          info@uawlocal647.org
+        </address>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="officers.html">Officers</a></li>
+          <li><a href="standing-committees.html">Standing Committees</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Documents</h4>
+        <ul>
+          <li><a href="grievance.html">Grievance Form</a></li>
+          <li><a href="contract.html">Contract</a></li>
+          <li><a href="bylaws.html">By-Laws</a></li>
+          <li><a href="constitution.html">Constitution</a></li>
+          <li><a href="seniority-report.html">Seniority Report</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 UAW Local 647. In Solidarity.</span>
+      <a href="admin/" class="admin-link">Admin</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/nav.js"></script>
+</body>
+</html>
