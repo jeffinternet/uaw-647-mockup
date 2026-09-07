@@ -11,18 +11,144 @@ title: Seniority Report
 </section>
 
 <section>
-  <div class="wrap content-page">
-    
-      <p>The seniority report reflects standing as of the most recent update from the company. Contact the Financial Secretary's office if you believe your listing is inaccurate.</p>
-      <table class="simple-table">
-        <thead><tr><th>Seniority #</th><th>Name</th><th>Unit</th><th>Date of Hire</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Member Name</td><td>Unit 7</td><td>03/1994</td></tr>
-          <tr><td>2</td><td>Member Name</td><td>Unit 2</td><td>06/1997</td></tr>
-          <tr><td>3</td><td>Member Name</td><td>Unit 7</td><td>11/2001</td></tr>
-          <tr><td>4</td><td>Member Name</td><td>Unit 2</td><td>02/2005</td></tr>
-        </tbody>
+  <div class="wrap content-page" style="max-width:1000px;">
+    <p>The seniority report reflects standing as of the most recent update from the company. Contact the Financial Secretary's office if you believe your listing is inaccurate.</p>
+
+    <div class="seniority-toolbar">
+      <input type="text" id="seniority-search" placeholder="Search by name, unit, or any column…" autocomplete="off">
+      <span id="seniority-count" class="seniority-count"></span>
+    </div>
+
+    <div id="seniority-status" class="placeholder-note">Loading the seniority report…</div>
+
+    <div id="seniority-table-wrap" class="seniority-table-wrap" hidden>
+      <table class="simple-table seniority-table" id="seniority-table">
+        <thead id="seniority-thead"></thead>
+        <tbody id="seniority-tbody"></tbody>
       </table>
-    
+    </div>
   </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script>
+(() => {
+  // TODO: replace with the real published-CSV link from the union's Google Sheet.
+  // In Google Sheets: File → Share → Publish to web → choose the specific
+  // sheet/tab → format "Comma-separated values (.csv)" → Publish → copy the URL.
+  const SHEET_CSV_URL = '';
+
+  // Sample data shown until a real sheet is connected, so the page previews
+  // populated rather than empty.
+  const SAMPLE_CSV = `Seniority #,Name,Unit,Classification,Date of Hire
+1,Member Name,Unit 7,Machinist,03/1994
+2,Member Name,Unit 2,Assembler,06/1997
+3,Member Name,Unit 7,Machinist,11/2001
+4,Member Name,Unit 2,Inspector,02/2005
+5,Member Name,Unit 7,Assembler,09/2008`;
+
+  const statusEl = document.getElementById('seniority-status');
+  const wrapEl = document.getElementById('seniority-table-wrap');
+  const theadEl = document.getElementById('seniority-thead');
+  const tbodyEl = document.getElementById('seniority-tbody');
+  const searchEl = document.getElementById('seniority-search');
+  const countEl = document.getElementById('seniority-count');
+
+  let columns = [];
+  let rows = [];
+  let sortCol = null;
+  let sortDir = 1;
+
+  function render() {
+    const query = searchEl.value.trim().toLowerCase();
+    let visible = rows;
+
+    if (query) {
+      visible = rows.filter((row) =>
+        columns.some((col) => String(row[col] ?? '').toLowerCase().includes(query))
+      );
+    }
+
+    if (sortCol) {
+      visible = visible.slice().sort((a, b) => {
+        const av = a[sortCol] ?? '';
+        const bv = b[sortCol] ?? '';
+        const an = parseFloat(av);
+        const bn = parseFloat(bv);
+        const bothNumeric = !isNaN(an) && !isNaN(bn) && String(av).trim() !== '' && String(bv).trim() !== '';
+        const cmp = bothNumeric ? an - bn : String(av).localeCompare(String(bv));
+        return cmp * sortDir;
+      });
+    }
+
+    tbodyEl.innerHTML = visible
+      .map((row) => `<tr>${columns.map((col) => `<td>${escapeHtml(row[col] ?? '')}</td>`).join('')}</tr>`)
+      .join('');
+
+    countEl.textContent = query
+      ? `Showing ${visible.length} of ${rows.length} members`
+      : `${rows.length} members`;
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
+  }
+
+  function buildHeader() {
+    theadEl.innerHTML = `<tr>${columns
+      .map((col) => `<th data-col="${escapeHtml(col)}" class="sortable">${escapeHtml(col)}<span class="sort-arrow"></span></th>`)
+      .join('')}</tr>`;
+
+    theadEl.querySelectorAll('th.sortable').forEach((th) => {
+      th.addEventListener('click', () => {
+        const col = th.getAttribute('data-col');
+        if (sortCol === col) {
+          sortDir *= -1;
+        } else {
+          sortCol = col;
+          sortDir = 1;
+        }
+        theadEl.querySelectorAll('.sort-arrow').forEach((a) => (a.textContent = ''));
+        th.querySelector('.sort-arrow').textContent = sortDir === 1 ? ' ▲' : ' ▼';
+        render();
+      });
+    });
+  }
+
+  function handleData(csvText) {
+    const parsed = Papa.parse(csvText.trim(), { header: true, skipEmptyLines: true });
+    columns = parsed.meta.fields || [];
+    rows = parsed.data.filter((row) => Object.values(row).some((v) => String(v ?? '').trim() !== ''));
+
+    if (!columns.length || !rows.length) {
+      statusEl.textContent = 'The seniority report is currently empty.';
+      return;
+    }
+
+    buildHeader();
+    render();
+    statusEl.hidden = true;
+    wrapEl.hidden = false;
+  }
+
+  searchEl.addEventListener('input', render);
+
+  if (SHEET_CSV_URL) {
+    fetch(SHEET_CSV_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.text();
+      })
+      .then(handleData)
+      .catch(() => {
+        statusEl.textContent = 'Unable to load the seniority report right now. Please try again later.';
+      });
+  } else {
+    // No sheet connected yet — show sample data.
+    handleData(SAMPLE_CSV);
+  }
+})();
+</script>
