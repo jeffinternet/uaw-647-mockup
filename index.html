@@ -61,7 +61,7 @@ header.main{
   position:sticky; top:0; z-index:50;
 }
 nav.wrap{
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
   padding-top:16px; padding-bottom:16px;
   position:relative;
 }
@@ -100,8 +100,13 @@ nav.wrap{
   box-shadow:0 12px 28px rgba(0,0,0,0.18);
   z-index:60; list-style:none;
 }
-.navlinks > li:hover .dropdown,
-.navlinks > li:focus-within .dropdown{ display:block; }
+/* Real mouse/trackpad devices: hover opens it, moving away closes it — no click needed */
+@media (hover:hover) and (pointer:fine){
+  .navlinks > li:hover > .dropdown,
+  .navlinks > li:focus-within > .dropdown{ display:block; }
+}
+/* Click-based open/close for touch devices (incl. iOS Safari at desktop width) and the mobile menu */
+.navlinks > li.open > .dropdown{ display:block; }
 .dropdown li{ list-style:none; }
 .dropdown li a{
   display:block; padding:10px 18px; font-size:14px; font-weight:500;
@@ -112,16 +117,20 @@ nav.wrap{
 .navtoggle{ display:none; background:none; border:none; color:var(--white); font-size:26px; cursor:pointer; }
 
 @media (max-width:860px){
+  header.main{ overflow:hidden; }
   .navlinks{
-    display:none; position:static; flex-direction:column; align-items:stretch; gap:0;
-    background:var(--navy); padding:8px 24px 18px;
-    max-height:0; overflow:hidden;
+    display:flex !important; flex-direction:column; align-items:stretch; gap:0;
+    background:var(--navy);
+    flex-basis:100%; order:3;
+    max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .32s ease, opacity .25s ease;
   }
-  .navlinks.open{ display:flex; max-height:none; }
+  .navlinks.open{ max-height:600px; opacity:1; }
   .navlinks > li > a, .navlinks > li > button.dropdown-toggle{
     padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.08); width:100%;
     text-align:left;
   }
+  .navlinks{ padding:8px 24px 18px; }
   .dropdown{
     display:block !important; position:static; box-shadow:none; border:none;
     background:transparent; padding:0 0 0 14px;
@@ -494,11 +503,14 @@ footer a:hover{ color:var(--gold); }
 
 <script>
 function toggleDropdown(el){
-  if (window.matchMedia('(max-width: 860px)').matches){
-    var li = el.parentElement;
-    li.classList.toggle('open');
-  }
+  var li = el.parentElement;
+  li.classList.toggle('open');
 }
+document.addEventListener('click', function(e){
+  document.querySelectorAll('.navlinks > li.has-dropdown.open').forEach(function(li){
+    if (!li.contains(e.target)){ li.classList.remove('open'); }
+  });
+});
 </script>
 </body>
 </html>
