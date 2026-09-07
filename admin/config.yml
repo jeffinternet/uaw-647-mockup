@@ -1,14 +1,8 @@
 backend:
   name: github
-  # TODO: replace with the actual GitHub "owner/repo" this site lives in,
-  # e.g. uawlocal647/uaw647-website
-  repo: OWNER/REPO
-  branch: main
-  # TODO: required because GitHub Pages has no server of its own to complete
-  # GitHub's OAuth login. Point this at your OAuth proxy's URL once it's
-  # deployed (see the setup notes that came with this file). Example:
-  # base_url: https://your-oauth-proxy.workers.dev
-  base_url: https://REPLACE-WITH-YOUR-OAUTH-PROXY-URL
+  repo: jeffinternet/uaw-647-mockup
+  branch: jekyll
+  base_url: https://sveltia-cms-auth.jalevline.workers.dev
 
 # Where uploaded officer photos are stored in the repo, and the path used
 # to reference them on the live site. Matches the site's plain relative-path
