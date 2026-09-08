@@ -1,13 +1,19 @@
 function toggleDropdown(el){
-  // Desktop / full-screen (viewport wider than the mobile breakpoint):
-  // the dropdown is shown purely by CSS :hover. Clicking should do nothing,
-  // so it can never get "stuck open" as a toggle on top of hover.
+  // Two independent things matter here, not one:
+  // - viewport width decides which nav LAYOUT is showing (full bar vs. hamburger)
+  // - hover-capability decides whether a tap should do anything at all
+  //
+  // A tap should only be ignored when BOTH are true: the full-width nav bar
+  // is showing AND the device has real hover (a mouse/trackpad) — in that
+  // case hover alone handles opening/closing. Every other combination
+  // (the hamburger menu, or a touch-only device that happens to have a wide
+  // enough screen to show the full bar) has no working hover, so a tap has
+  // to do the job instead.
   var isDesktopWidth = window.matchMedia('(min-width: 861px)').matches;
-  if (isDesktopWidth) {
+  var hasRealHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (isDesktopWidth && hasRealHover) {
     return;
   }
-  // Mobile / hamburger menu (narrow viewport): there's no hover at all here,
-  // so a tap has to explicitly open/close the dropdown.
   var li = el.parentElement;
   li.classList.toggle('open');
 }
