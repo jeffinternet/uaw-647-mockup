@@ -1,0 +1,5 @@
+title: UAW Local 647
+description: Official website of UAW Local 647, Greater Cincinnati, OH
+# No baseurl needed — the layout uses plain relative links (about.html, assets/css/style.css, etc.)
+# so the site works the same whether it's served at a project-pages subpath
+# (yourname.github.io/repo-name/) or later at a custom domain root (uawlocal647.org).
