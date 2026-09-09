@@ -3,7 +3,7 @@ layout: default
 title: Standing Committees
 ---
 
-<section class="page-hero" style="padding-bottom:56px;">
+<section class="page-hero">
   <div class="wrap">
     <div class="eyebrow">Leadership</div>
     <h1>Standing Committees</h1>
@@ -12,7 +12,7 @@ title: Standing Committees
 
 <section>
   <div class="wrap content-page">
-    <div class="committee-grid" style="margin-top:8px;">
+    <div class="committee-grid">
       {% for c in site.data.committees %}
         {% assign chair = site.data.committee_chairs[c.key] %}
         <div class="committee-card">

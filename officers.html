@@ -3,7 +3,7 @@ layout: default
 title: Officers
 ---
 
-<section class="page-hero" style="padding-bottom:56px;">
+<section class="page-hero">
   <div class="wrap">
     <div class="eyebrow">Leadership</div>
     <h1>Executive Board</h1>
@@ -12,7 +12,7 @@ title: Officers
 
 <section>
   <div class="wrap content-page">
-    <div class="officer-grid" style="margin-top:8px;">
+    <div class="officer-grid">
       {% for role in site.data.officer_roles %}
         {% assign officer = site.data.officers[role.key] %}
         {% assign oname = officer.name %}

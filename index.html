@@ -3,119 +3,58 @@ layout: default
 title: Home
 ---
 
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Chartered 1942 &middot; UAW Region 2B</div>
-    <h1>Built by members. Backed by solidarity.</h1>
-    <p class="lede">UAW Local 647 represents workers across greater Cincinnati &mdash; protecting our contract, defending our rights, and standing together on and off the shop floor.</p>
-    <div class="ctas">
-      <a href="grievance.html" class="btn btn-primary">File a Grievance</a>
-      <a href="officers.html" class="btn btn-ghost">Meet Your Officers</a>
-    </div>
-  </div>
-</section>
-<div class="infostrip">
-  <div class="wrap">
-    <div><b>Next Membership Meeting</b> &mdash; Wed, Sept 3, 6:00 PM</div>
-    <div><b>Next Retiree Meeting</b> &mdash; Thu, Sept 11, 10:00 AM</div>
-    <div><b>Office Hours</b> &mdash; Mon&ndash;Fri, 8 AM&ndash;4:30 PM</div>
-  </div>
-</div>
+<section class="hero"><div class="wrap"><div class="hero-inner">
+  <div class="eyebrow">Chartered 1942 &middot; UAW Region 2B</div>
+  <h1>Built by members.<br>Backed by solidarity.</h1>
+  <p>UAW Local 647 represents workers across greater Cincinnati &mdash; protecting our contract, defending our rights, and standing together on and off the shop floor.</p>
+  <div class="ctas"><a class="btn-primary" href="grievance.html">File a Grievance</a><a class="btn-ghost" href="officers.html">Meet Your Officers</a></div>
+</div></div></section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">Start Here</span>
-      <h2>Get What You Need</h2>
-    </div>
-    <div class="actions-grid">
-      <div class="action-card">
-        <h3>File a Grievance</h3>
-        <p>Submit an issue directly to your unit's grievance committee for review.</p>
-        <a href="grievance.html" class="go">Open the form</a>
-      </div>
-      <div class="action-card">
-        <h3>Know Your Rights</h3>
-        <p>Understand your rights during disciplinary meetings and investigations.</p>
-        <a href="grievance.html" class="go">Read the guide</a>
-      </div>
-      <div class="action-card">
-        <h3>Contract &amp; By-Laws</h3>
-        <p>Download the current local agreement, unit by-laws, and seniority reports.</p>
-        <a href="contract.html" class="go">View documents</a>
-      </div>
-      <div class="action-card">
-        <h3>Talk to an Officer</h3>
-        <p>Reach your unit rep, committee chair, or the union hall directly.</p>
-        <a href="contact.html" class="go">Find a contact</a>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="impact"><div class="wrap">
+  <div class="impact-badge"><b>1942</b><span>Chartered</span></div><div class="impact-badge"><b>2B</b><span>Region</span></div><div class="impact-badge"><b>12</b><span>Standing Committees</span></div><div class="impact-badge"><b>2</b><span>Units Represented</span></div>
+</div></div>
 
-<section>
-  <div class="wrap about">
-    <div>
-      <span class="section-head kicker">Who We Are</span>
-      <h2>Representing Workers Since 1942</h2>
-      <p>UAW Local 647 has represented employees across greater Cincinnati for more than eight decades &mdash; bargaining fair contracts, defending members through the grievance process, and building power on the shop floor.</p>
-      <p>Our Executive Board, Bargaining Committee, and unit-level stewards work every day to make sure every member's voice is heard.</p>
-    </div>
-    <div class="stat-grid">
-      <div class="stat-card"><b>1942</b><span>Chartered</span></div>
-      <div class="stat-card"><b>2B</b><span>Region</span></div>
-      <div class="stat-card"><b>12</b><span>Standing Committees</span></div>
-      <div class="stat-card"><b>2</b><span>Units Represented</span></div>
-    </div>
+<section><div class="wrap">
+  <div class="section-head"><span class="kicker">Start Here</span><h2>Get What You Need</h2></div>
+  <div class="bento">
+    <a class="bento-feature" href="grievance.html"><h3>File a Grievance</h3><p>Submit an issue directly to your unit's grievance committee for review.</p><span class="go">Open the form &rarr;</span></a>
+    <a class="bento-small" href="grievance.html"><h3>Know Your Rights</h3><p>Understand your rights during disciplinary meetings and investigations.</p></a>
+    <a class="bento-small" href="contract.html"><h3>Contract &amp; By-Laws</h3><p>Download the current local agreement, unit by-laws, and seniority reports.</p></a>
   </div>
-</section>
+</div></section>
 
-<section class="officers-band">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">2024&ndash;2027 Term</span>
-      <h2>Executive Board</h2>
-    </div>
-    <div class="officer-grid">
-      {% assign preview_keys = "president,vice_president,financial_secretary,recording_secretary" | split: "," %}
-      {% for role in site.data.officer_roles %}
-        {% if preview_keys contains role.key %}
-          {% assign officer = site.data.officers[role.key] %}
-          {% assign oname = officer.name %}
-          <div class="officer">
-            {% if officer.photo and officer.photo != "" %}
-              <div class="photo"><img src="{{ officer.photo }}" alt="{% if oname and oname != '' %}{{ oname }}{% else %}{{ role.title }}{% endif %}"></div>
-            {% else %}
-              <div class="photo">{{ role.initials }}</div>
-            {% endif %}
-            <h3>{{ role.title }}</h3>
-            <h4 class="officer-name">{% if oname and oname != "" %}{{ oname }}{% else %}TBD{% endif %}</h4>
+<section><div class="wrap">
+  <div class="section-head"><span class="kicker">Who We Are</span><h2>Representing Workers Since 1942</h2></div>
+  <p style="max-width:70ch;color:var(--steel);font-size:16px;margin-bottom:36px;">UAW Local 647 has represented employees across greater Cincinnati for more than eight decades &mdash; bargaining fair contracts, defending members through the grievance process, and building power on the shop floor. Our Executive Board, Bargaining Committee, and unit-level stewards work every day to make sure every member's voice is heard.</p>
+  <div class="officer-row">
+    {% assign preview_keys = "president,vice_president,financial_secretary,recording_secretary" | split: "," %}
+    {% for role in site.data.officer_roles %}
+      {% if preview_keys contains role.key %}
+        {% assign officer = site.data.officers[role.key] %}
+        {% assign oname = officer.name %}
+        <div class="officer-bubble">
+          <div class="photo" style="background:linear-gradient(135deg,var(--red),var(--navy));">
+            {% if officer.photo and officer.photo != "" %}<img src="{{ officer.photo }}" alt="{% if oname and oname != '' %}{{ oname }}{% else %}{{ role.title }}{% endif %}">{% else %}{{ role.initials }}{% endif %}
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+          <h3>{% if oname and oname != "" %}{{ oname }}{% else %}TBD{% endif %}</h3>
+          <div class="role">{{ role.title }}</div>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
-</section>
+</div></section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">Latest</span>
-      <h2>Local News</h2>
-    </div>
-    <div class="news-list">
-      <div class="news-item">
-        <div class="date">Aug 14</div>
-        <div><h3>Fall contract enforcement training scheduled</h3><p>Stewards and committee members: sign up for the Region 2B bargaining and contract enforcement boot camp.</p></div>
-      </div>
-      <div class="news-item">
-        <div class="date">Aug 2</div>
-        <div><h3>Scholarship applications open for members' families</h3><p>The annual Local 647 scholarship program is now accepting applications through October 1.</p></div>
-      </div>
-      <div class="news-item">
-        <div class="date">Jul 21</div>
-        <div><h3>Summer Solidarity Magazine now available</h3><p>Read the latest issue covering national bargaining wins and member spotlights.</p></div>
-      </div>
-    </div>
+<section><div class="wrap">
+  <div class="section-head"><span class="kicker">Latest</span><h2>Local News</h2></div>
+  <div class="news-grid">
+    <div class="news-card"><div class="head" style="background:var(--navy);">Aug 14</div><div class="body"><h3>Fall contract enforcement training scheduled</h3><p>Stewards and committee members: sign up for the Region 2B bargaining and contract enforcement boot camp.</p></div></div>
+    <div class="news-card"><div class="head" style="background:var(--red);">Aug 2</div><div class="body"><h3>Scholarship applications open for members' families</h3><p>The annual Local 647 scholarship program is now accepting applications through October 1.</p></div></div>
+    <div class="news-card"><div class="head" style="background:#3A6EA5;">Jul 21</div><div class="body"><h3>Summer Solidarity Magazine now available</h3><p>Read the latest issue covering national bargaining wins and member spotlights.</p></div></div>
   </div>
-</section>
+</div></section>
+
+<section><div class="cta-banner">
+  <h2>Get Involved</h2>
+  <p>From standing committees to steward training, there's a way for every member to help build a stronger Local 647.</p>
+  <a class="btn" href="standing-committees.html">See Standing Committees</a>
+</div></section>

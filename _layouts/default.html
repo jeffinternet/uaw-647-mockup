@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} | {{ site.title }}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="{{ site.data.theme.font_url }}" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 <header class="main">
   <nav class="wrap">
     <a href="index.html" class="logo">
-      <img src="assets/img/uaw-logo.png" alt="UAW logo" class="logo-mark">
+      <div class="logo-badge"><img src="assets/img/uaw-logo.png" alt="UAW logo" class="logo-mark"></div>
       <span class="word">LOCAL 647<span>Greater Cincinnati, OH</span></span>
     </a>
     <button class="navtoggle" aria-label="Toggle menu" onclick="document.querySelector('.navlinks').classList.toggle('open')">&#9776;</button>
@@ -89,7 +89,6 @@
     </div>
     <div class="foot-bottom">
       <span>&copy; 2026 UAW Local 647. In Solidarity.</span>
-      <a href="admin/" class="admin-link" target="_blank" rel="noopener">Admin</a>
     </div>
   </div>
 </footer>
