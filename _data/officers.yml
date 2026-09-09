@@ -1,0 +1,24 @@
+president:
+  name: ""
+  photo: ""
+vice_president:
+  name: ""
+  photo: ""
+financial_secretary:
+  name: ""
+  photo: ""
+recording_secretary:
+  name: ""
+  photo: ""
+trustee_1:
+  name: ""
+  photo: ""
+trustee_2:
+  name: ""
+  photo: ""
+sergeant_at_arms:
+  name: ""
+  photo: ""
+guide:
+  name: ""
+  photo: ""
